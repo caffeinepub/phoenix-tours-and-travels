@@ -160,7 +160,7 @@ const packages = [
     price: 23530,
     description:
       "Conquer the roof of the world — high-altitude passes, crystal-clear lakes, ancient monasteries, and starlit skies.",
-    image: "/assets/generated/dest-manali.dim_400x300.jpg",
+    image: "/assets/generated/dest-ladakh.dim_400x300.jpg",
     highlights: ["Pangong Lake", "Nubra Valley", "Khardung La Pass"],
   },
   {
@@ -310,9 +310,9 @@ export default function App() {
               data-ocid="nav.link"
             >
               <img
-                src="/assets/generated/phonix-logo-transparent.dim_200x200.png"
+                src="/assets/1000399371-019d4848-de9d-738f-9ff8-eb224153380e.jpg"
                 alt="Phoenix Logo"
-                className="w-10 h-10 object-contain"
+                className="w-12 h-12 object-contain rounded"
               />
               <div className="leading-tight">
                 <div
@@ -795,11 +795,11 @@ export default function App() {
             >
               {[
                 {
-                  src: "/assets/generated/fleet-car-1.dim_800x500.jpg",
+                  src: "/assets/1000393746-019d484c-6eaf-776f-9f53-f1d6a5711594.jpg",
                   caption: "Suzuki Ertiga - Premium Comfort",
                 },
                 {
-                  src: "/assets/generated/fleet-car-2.dim_800x500.jpg",
+                  src: "/assets/1000393742-019d484c-74b4-707d-a848-16c7dcc97ecd.jpg",
                   caption: "Suzuki Ertiga - Spacious MPV",
                 },
               ].map((car, i) => (
@@ -1029,9 +1029,9 @@ export default function App() {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <img
-                  src="/assets/generated/phonix-logo-transparent.dim_200x200.png"
+                  src="/assets/1000399371-019d4848-de9d-738f-9ff8-eb224153380e.jpg"
                   alt="Phoenix Logo"
-                  className="w-10 h-10 object-contain"
+                  className="w-12 h-12 object-contain rounded"
                 />
                 <div className="leading-tight">
                   <div
