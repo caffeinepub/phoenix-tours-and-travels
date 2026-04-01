@@ -1186,11 +1186,11 @@ export default function App() {
                     style={{ color: "#F28C28" }}
                   />
                   <span className="text-gray-400 text-sm leading-relaxed">
-                    10/1, Chamundinagar First Cross,
+                    10/1 1st Cross Road,
                     <br />
-                    Shalini Bar Back Side, RT Nagar Post,
+                    CBI Road, RT Nagar Post,
                     <br />
-                    Bangalore - 560032
+                    Bangalore, Karnataka - 560032
                   </span>
                 </li>
               </ul>
