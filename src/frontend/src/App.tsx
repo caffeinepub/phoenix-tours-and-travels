@@ -21,7 +21,6 @@ import {
   Plane,
   Search,
   Shield,
-  Star,
   Twitter,
   Users,
   X,
@@ -32,126 +31,192 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useActor } from "./hooks/useActor";
 
-const destinations = [
+const popularDestinations = [
   {
-    id: 1,
     name: "Goa",
-    country: "India",
-    rating: 4.8,
+    tagline: "Sun, Sand & Portuguese Charm",
     image: "/assets/generated/dest-goa.dim_400x300.jpg",
   },
   {
-    id: 2,
-    name: "Agra",
-    country: "India",
-    rating: 4.9,
-    image: "/assets/generated/dest-agra.dim_400x300.jpg",
-  },
-  {
-    id: 3,
     name: "Kerala",
-    country: "India",
-    rating: 4.7,
+    tagline: "God's Own Country",
     image: "/assets/generated/dest-kerala.dim_400x300.jpg",
   },
   {
-    id: 4,
-    name: "Manali",
-    country: "India",
-    rating: 4.8,
-    image: "/assets/generated/dest-manali.dim_400x300.jpg",
-  },
-  {
-    id: 5,
-    name: "Rajasthan",
-    country: "India",
-    rating: 4.6,
-    image: "/assets/generated/dest-rajasthan.dim_400x300.jpg",
-  },
-  {
-    id: 6,
-    name: "Andaman",
-    country: "India",
-    rating: 4.9,
-    image: "/assets/generated/dest-andaman.dim_400x300.jpg",
-  },
-  {
-    id: 7,
-    name: "Ladakh",
-    country: "India",
-    rating: 4.9,
+    name: "Leh-Ladakh",
+    tagline: "The Roof of the World",
     image: "/assets/generated/dest-ladakh.dim_400x300.jpg",
   },
   {
-    id: 8,
-    name: "Coorg",
-    country: "India",
-    rating: 4.8,
-    image: "/assets/generated/dest-coorg.dim_400x300.jpg",
+    name: "Rajasthan",
+    tagline: "Land of Kings & Forts",
+    image: "/assets/generated/dest-rajasthan.dim_400x300.jpg",
   },
   {
-    id: 9,
-    name: "Varanasi",
-    country: "India",
-    rating: 4.7,
-    image: "/assets/generated/dest-varanasi.dim_400x300.jpg",
+    name: "Mysore",
+    tagline: "The Royal City of Palaces",
+    image: "/assets/generated/dest-mysore.dim_400x300.jpg",
   },
   {
-    id: 10,
     name: "Ooty",
-    country: "India",
-    rating: 4.6,
+    tagline: "Queen of Hill Stations",
     image: "/assets/generated/dest-ooty.dim_400x300.jpg",
   },
   {
-    id: 11,
-    name: "Mysore",
-    country: "India",
-    rating: 4.8,
-    image: "/assets/generated/dest-mysore.dim_400x300.jpg",
+    name: "Coorg",
+    tagline: "Scotland of India",
+    image: "/assets/generated/dest-coorg.dim_400x300.jpg",
+  },
+  {
+    name: "Pondicherry",
+    tagline: "French Riviera of the East",
+    image: "/assets/generated/dest-pondicherry.dim_400x300.jpg",
   },
 ];
 
 const packages = [
   {
     id: 1,
-    name: "Golden Triangle Tour",
-    destination: "Delhi - Agra - Jaipur",
-    duration: 5,
-    description:
-      "Explore India's iconic Golden Triangle covering the majestic Taj Mahal, Amber Fort, and historic Delhi monuments.",
-    image: "/assets/generated/dest-agra.dim_400x300.jpg",
-    highlights: ["Taj Mahal", "Amber Fort", "Qutub Minar"],
-  },
-  {
-    id: 2,
-    name: "Kerala Backwaters",
-    destination: "Kochi - Munnar - Alleppey",
-    duration: 6,
-    description:
-      "Experience the serene backwaters, lush tea gardens, and vibrant culture of God's Own Country on a luxury houseboat.",
-    image: "/assets/generated/dest-kerala.dim_400x300.jpg",
-    highlights: ["Houseboat Stay", "Munnar Tea Gardens", "Kathakali Show"],
-  },
-  {
-    id: 3,
     name: "Goa Beach Holiday",
     destination: "North & South Goa",
     duration: 4,
+    price: 22400,
     description:
       "Sun, sand, and sea — enjoy the best of Goa's beaches, vibrant nightlife, Portuguese heritage, and fresh seafood.",
     image: "/assets/generated/dest-goa.dim_400x300.jpg",
     highlights: ["Baga Beach", "Dudhsagar Falls", "Old Goa Churches"],
   },
   {
-    id: 4,
-    name: "Manali Adventure",
-    destination: "Manali - Solang Valley",
-    duration: 5,
+    id: 2,
+    name: "Mysore Heritage Tour",
+    destination: "Mysore",
+    duration: 2,
+    price: 7110,
     description:
-      "Adventure awaits in the breathtaking Himalayas — trek, ski, and soak in the beauty of snow-capped peaks and meadows.",
+      "Explore the royal city of Mysore — the grand Mysore Palace, Chamundi Hills, Brindavan Gardens, and silk markets.",
+    image: "/assets/generated/dest-mysore.dim_400x300.jpg",
+    highlights: ["Mysore Palace", "Chamundi Hills", "Brindavan Gardens"],
+  },
+  {
+    id: 3,
+    name: "Coorg Coffee Trail",
+    destination: "Coorg (Kodagu)",
+    duration: 3,
+    price: 10650,
+    description:
+      "Breathe in the misty hills of Coorg — lush coffee plantations, Abbey Falls, Raja's Seat, and rich Kodava culture.",
+    image: "/assets/generated/dest-coorg.dim_400x300.jpg",
+    highlights: ["Abbey Falls", "Raja's Seat", "Coffee Estates"],
+  },
+  {
+    id: 4,
+    name: "Ooty Hills Escape",
+    destination: "Ooty, Tamil Nadu",
+    duration: 3,
+    price: 15300,
+    description:
+      "Discover the Queen of Hill Stations — toy train rides, botanical gardens, Doddabetta Peak, and scenic tea estates.",
+    image: "/assets/generated/dest-ooty.dim_400x300.jpg",
+    highlights: ["Toy Train", "Botanical Garden", "Doddabetta Peak"],
+  },
+  {
+    id: 5,
+    name: "Munnar Tea Trails",
+    destination: "Munnar, Kerala",
+    duration: 4,
+    price: 18700,
+    description:
+      "Wake up to rolling green tea estates, misty valleys, and the serenity of Eravikulam National Park.",
+    image: "/assets/generated/dest-kerala.dim_400x300.jpg",
+    highlights: ["Tea Gardens", "Eravikulam NP", "Mattupetty Dam"],
+  },
+  {
+    id: 6,
+    name: "Taj Mahal & Agra Tour",
+    destination: "Agra, Uttar Pradesh",
+    duration: 2,
+    price: 74600,
+    description:
+      "Stand before the world's most iconic monument — the Taj Mahal — and explore Agra Fort and Fatehpur Sikri.",
+    image: "/assets/generated/dest-agra.dim_400x300.jpg",
+    highlights: ["Taj Mahal", "Agra Fort", "Fatehpur Sikri"],
+  },
+  {
+    id: 7,
+    name: "Tirupati Divine Darshan",
+    destination: "Tirupati, Andhra Pradesh",
+    duration: 2,
+    price: 11200,
+    description:
+      "A sacred pilgrimage to Lord Venkateswara Temple atop Tirumala Hills — one of the most visited shrines in the world.",
+    image: "/assets/generated/dest-tirupati.dim_400x300.jpg",
+    highlights: ["Tirumala Temple", "Padmavathi Temple", "Kapila Theertham"],
+  },
+  {
+    id: 8,
+    name: "Leh-Ladakh Adventure",
+    destination: "Leh, Ladakh",
+    duration: 7,
+    price: 23530,
+    description:
+      "Conquer the roof of the world — high-altitude passes, crystal-clear lakes, ancient monasteries, and starlit skies.",
     image: "/assets/generated/dest-manali.dim_400x300.jpg",
-    highlights: ["Solang Valley", "Rohtang Pass", "River Rafting"],
+    highlights: ["Pangong Lake", "Nubra Valley", "Khardung La Pass"],
+  },
+  {
+    id: 9,
+    name: "Pondicherry Getaway",
+    destination: "Pondicherry",
+    duration: 3,
+    price: 15060,
+    description:
+      "Experience the French Quarter charm — colorful colonial streets, Auroville, serene beaches, and fine dining.",
+    image: "/assets/generated/dest-pondicherry.dim_400x300.jpg",
+    highlights: ["French Quarter", "Auroville", "Promenade Beach"],
+  },
+  {
+    id: 10,
+    name: "Kerala Backwaters",
+    destination: "Kochi - Munnar - Alleppey",
+    duration: 6,
+    price: 22260,
+    description:
+      "Experience the serene backwaters, lush tea gardens, and vibrant culture of God's Own Country on a luxury houseboat.",
+    image: "/assets/generated/dest-kerala.dim_400x300.jpg",
+    highlights: ["Houseboat Stay", "Munnar Tea Gardens", "Kathakali Show"],
+  },
+  {
+    id: 11,
+    name: "Chennai City Tour",
+    destination: "Chennai, Tamil Nadu",
+    duration: 3,
+    price: 14460,
+    description:
+      "Explore the cultural capital of South India — Marina Beach, Kapaleeshwarar Temple, Fort St. George, and local cuisine.",
+    image: "/assets/generated/dest-chennai.dim_400x300.jpg",
+    highlights: ["Marina Beach", "Kapaleeshwarar Temple", "Fort St. George"],
+  },
+  {
+    id: 12,
+    name: "Andhra Pradesh Explorer",
+    destination: "Andhra Pradesh",
+    duration: 5,
+    price: 18720,
+    description:
+      "Discover the heritage and natural beauty of Andhra — from Araku Valley to ancient temples and pristine coastline.",
+    image: "/assets/generated/dest-tirupati.dim_400x300.jpg",
+    highlights: ["Araku Valley", "Borra Caves", "Visakhapatnam Beach"],
+  },
+  {
+    id: 13,
+    name: "Hyderabad Heritage",
+    destination: "Hyderabad, Telangana",
+    duration: 3,
+    price: 22580,
+    description:
+      "Explore the City of Pearls — Charminar, Golconda Fort, Ramoji Film City, and the famous Hyderabadi biryani.",
+    image: "/assets/generated/dest-hyderabad.dim_400x300.jpg",
+    highlights: ["Charminar", "Golconda Fort", "Ramoji Film City"],
   },
 ];
 
@@ -182,7 +247,6 @@ const navLinks = [
   { label: "Services", href: "#services" },
   { label: "Fleet", href: "#fleet" },
   { label: "Team", href: "#team" },
-  { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -445,29 +509,6 @@ export default function App() {
               </div>
             </motion.div>
           </div>
-
-          {/* Stats Bar */}
-          <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-md border-t border-white/20">
-            <div className="max-w-5xl mx-auto px-4 py-4 grid grid-cols-3 gap-4 text-white text-center">
-              {[
-                { value: "500+", label: "Tour Packages" },
-                { value: "50,000+", label: "Happy Travelers" },
-                { value: "15+", label: "Years Experience" },
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <div
-                    className="text-xl sm:text-2xl font-black"
-                    style={{ color: "#F28C28" }}
-                  >
-                    {stat.value}
-                  </div>
-                  <div className="text-xs sm:text-sm opacity-80">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
         </section>
 
         {/* POPULAR DESTINATIONS */}
@@ -480,20 +521,12 @@ export default function App() {
               transition={{ duration: 0.6 }}
               className="text-center mb-12"
             >
-              <div className="flex items-center justify-center gap-3 mb-2">
-                <p
-                  className="text-sm font-semibold tracking-widest"
-                  style={{ color: "#138C8F" }}
-                >
-                  EXPLORE INDIA
-                </p>
-                <span
-                  className="text-xs font-bold px-2.5 py-0.5 rounded-full text-white"
-                  style={{ backgroundColor: "#F28C28" }}
-                >
-                  Domestic Only
-                </span>
-              </div>
+              <p
+                className="text-sm font-semibold tracking-widest mb-2"
+                style={{ color: "#138C8F" }}
+              >
+                EXPLORE INDIA
+              </p>
               <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-tight text-gray-900">
                 POPULAR DESTINATIONS
               </h2>
@@ -504,40 +537,59 @@ export default function App() {
             </motion.div>
 
             <div
-              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"
+              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"
               data-ocid="destinations.list"
             >
-              {destinations.map((dest, i) => (
-                <motion.div
-                  key={dest.id}
+              {popularDestinations.map((dest, i) => (
+                <motion.a
+                  key={dest.name}
+                  href="#packages"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.07 }}
-                  className="relative rounded-2xl overflow-hidden cursor-pointer group shadow-card"
-                  style={{ aspectRatio: "4/3" }}
+                  transition={{ duration: 0.4, delay: i * 0.07 }}
+                  className="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 block"
                   data-ocid={`destinations.item.${i + 1}`}
                 >
-                  <img
-                    src={dest.image}
-                    alt={dest.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 card-dest-gradient" />
-                  <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
-                    <h3 className="font-bold text-base leading-tight">
-                      {dest.name}
-                    </h3>
-                    <p className="text-xs opacity-80 mb-1">{dest.country}</p>
-                    <div className="flex items-center justify-end">
-                      <span className="flex items-center gap-1 text-xs">
-                        <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                        {dest.rating}
-                      </span>
+                  <div className="relative h-48 sm:h-56">
+                    <img
+                      src={dest.image}
+                      alt={dest.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                    {/* Content */}
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <h3 className="text-white font-bold text-base sm:text-lg leading-tight">
+                        {dest.name}
+                      </h3>
+                      <p className="text-white/80 text-xs mt-0.5 leading-snug">
+                        {dest.tagline}
+                      </p>
+                    </div>
+                    {/* Hover arrow */}
+                    <div
+                      className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                      style={{ backgroundColor: "#F28C28" }}
+                    >
+                      <ChevronRight className="w-4 h-4 text-white" />
                     </div>
                   </div>
-                </motion.div>
+                </motion.a>
               ))}
+            </div>
+
+            <div className="text-center mt-10">
+              <a
+                href="#packages"
+                className="inline-flex items-center gap-2 rounded-full font-semibold text-sm px-8 py-3 text-white transition-opacity hover:opacity-90"
+                style={{ backgroundColor: "#138C8F" }}
+                data-ocid="destinations.primary_button"
+              >
+                View All Tour Packages
+                <ChevronRight className="w-4 h-4" />
+              </a>
             </div>
           </div>
         </section>
@@ -568,7 +620,7 @@ export default function App() {
             </motion.div>
 
             <div
-              className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
               data-ocid="packages.list"
             >
               {packages.map((pkg, i) => (
@@ -618,6 +670,20 @@ export default function App() {
                           {h}
                         </span>
                       ))}
+                    </div>
+                    <div className="flex items-center justify-between mb-3">
+                      <div>
+                        <span className="text-xs text-gray-500">
+                          Starting from
+                        </span>
+                        <p
+                          className="text-lg font-bold"
+                          style={{ color: "#138C8F" }}
+                        >
+                          ₹{pkg.price.toLocaleString("en-IN")}
+                        </p>
+                      </div>
+                      <span className="text-xs text-gray-400">per person</span>
                     </div>
                     <a
                       href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hi, I'm interested in the ${pkg.name} package. Please share more details.`)}`}
@@ -729,11 +795,11 @@ export default function App() {
             >
               {[
                 {
-                  src: "/assets/uploads/whatsapp_image_2026-03-28_at_7.00.35_pm-019d34a8-546c-76fb-ae2b-13d0d95acfae-1.jpeg",
+                  src: "/assets/generated/fleet-car-1.dim_800x500.jpg",
                   caption: "Suzuki Ertiga - Premium Comfort",
                 },
                 {
-                  src: "/assets/uploads/whatsapp_image_2026-03-28_at_7.00.36_pm-019d34a8-5555-741e-88ce-98373d607961-2.jpeg",
+                  src: "/assets/generated/fleet-car-2.dim_800x500.jpg",
                   caption: "Suzuki Ertiga - Spacious MPV",
                 },
               ].map((car, i) => (
@@ -853,107 +919,6 @@ export default function App() {
                     </svg>
                   </a>
                 </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* ABOUT US */}
-        <section id="about" className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="relative"
-              >
-                <img
-                  src="/assets/generated/dest-kerala.dim_400x300.jpg"
-                  alt="About Phoenix Tours"
-                  className="w-full h-80 lg:h-96 object-cover rounded-3xl shadow-xl"
-                />
-                <div
-                  className="absolute -bottom-4 -right-4 bg-white rounded-2xl p-4 shadow-lg"
-                  style={{ border: "2px solid #F28C28" }}
-                >
-                  <div
-                    className="text-2xl font-black"
-                    style={{ color: "#F28C28" }}
-                  >
-                    15+
-                  </div>
-                  <div className="text-xs text-gray-600 font-medium">
-                    Years of Excellence
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <p
-                  className="text-sm font-semibold tracking-widest mb-2"
-                  style={{ color: "#138C8F" }}
-                >
-                  WHO WE ARE
-                </p>
-                <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-tight text-gray-900 mb-6">
-                  YOUR TRUSTED
-                  <br />
-                  <span style={{ color: "#F28C28" }}>TRAVEL PARTNER</span>
-                </h2>
-                <p className="text-gray-600 leading-relaxed mb-4">
-                  Welcome to <strong>Phoenix Tours & Travels</strong> — where
-                  every journey is crafted with passion, precision, and personal
-                  care. With over 15 years of experience, we have helped
-                  thousands of travelers across incredible India discover their
-                  dream destinations.
-                </p>
-                <p className="text-gray-600 leading-relaxed mb-6">
-                  From the golden sands of Goa to the majestic peaks of Ladakh,
-                  our expert team curates unforgettable experiences tailored to
-                  your preferences and budget. We handle everything so you can
-                  focus on making memories.
-                </p>
-
-                <div className="grid grid-cols-2 gap-4 mb-8">
-                  {[
-                    { icon: Users, value: "50,000+", label: "Happy Travelers" },
-                    { icon: Globe, value: "200+", label: "India Spots" },
-                    { icon: Star, value: "4.9/5", label: "Average Rating" },
-                    { icon: Clock, value: "24/7", label: "Customer Support" },
-                  ].map(({ icon: Icon, value, label }) => (
-                    <div key={label} className="flex items-center gap-3">
-                      <div
-                        className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                        style={{ backgroundColor: "#fff5ea" }}
-                      >
-                        <Icon
-                          className="w-5 h-5"
-                          style={{ color: "#F28C28" }}
-                        />
-                      </div>
-                      <div>
-                        <div className="font-bold text-gray-900">{value}</div>
-                        <div className="text-xs text-gray-500">{label}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <Button
-                  className="rounded-full font-semibold px-8"
-                  style={{ backgroundColor: "#F28C28", color: "white" }}
-                  data-ocid="about.primary_button"
-                >
-                  Read More About Us
-                  <ChevronRight className="w-4 h-4 ml-1" />
-                </Button>
               </motion.div>
             </div>
           </div>
@@ -1147,12 +1112,12 @@ export default function App() {
               </h3>
               <ul className="space-y-3">
                 {[
-                  "Golden Triangle",
-                  "Kerala Backwaters",
                   "Goa Beach Holiday",
-                  "Manali Adventure",
-                  "Andaman Islands",
-                  "Rajasthan Heritage",
+                  "Kerala Backwaters",
+                  "Leh-Ladakh Adventure",
+                  "Taj Mahal & Agra Tour",
+                  "Munnar Tea Trails",
+                  "Hyderabad Heritage",
                 ].map((t) => (
                   <li key={t}>
                     <a
