@@ -671,19 +671,16 @@ export default function App() {
                         </span>
                       ))}
                     </div>
-                    <div className="flex items-center justify-between mb-3">
-                      <div>
-                        <span className="text-xs text-gray-500">
-                          Starting from
-                        </span>
-                        <p
-                          className="text-lg font-bold"
-                          style={{ color: "#138C8F" }}
-                        >
-                          ₹{pkg.price.toLocaleString("en-IN")}
-                        </p>
-                      </div>
-                      <span className="text-xs text-gray-400">per person</span>
+                    <div className="mb-3">
+                      <span className="text-xs text-gray-500">
+                        Starting from
+                      </span>
+                      <p
+                        className="text-lg font-bold"
+                        style={{ color: "#138C8F" }}
+                      >
+                        ₹{pkg.price.toLocaleString("en-IN")}
+                      </p>
                     </div>
                     <a
                       href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hi, I'm interested in the ${pkg.name} package. Please share more details.`)}`}
